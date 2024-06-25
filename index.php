@@ -1,7 +1,31 @@
 <?php
-$passowrdGenerata;
 
-$numeroCaratteri = $_GET['numeroCaratteri'];
+$numeroCaratteri = intval($_GET['numeroCaratteri']);
+
+
+$lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+
+$upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+$numbers = '0123456789';
+
+$symbols = '!@#$%^&*()-_=+[]{}|;:,.<>?';
+
+$listacaratteri = $lowerCase . $upperCase . $numbers . $symbols;
+
+function passowrdGen($passwordLenght, $carattteriLenght)
+{
+    $passowrdGenerata = '';
+
+    for ($i = 0; $i < $passwordLenght; $i++) {
+        $random = rand(0, strlen($carattteriLenght) - 1);
+        $passowrdGenerata .= $carattteriLenght[$random];
+    }
+
+    return $passowrdGenerata;
+}
+
+$passowrdGenerata = passowrdGen($numeroCaratteri, $listacaratteri);
 
 ?>
 
@@ -17,14 +41,14 @@ $numeroCaratteri = $_GET['numeroCaratteri'];
     <div class="container-xl">
                 <h1 class="text-center m-5">Password Generator</h1>
                 <div class="row d-flex">
-                    <div class="col-12">
+                    <div class="col-12 text-center">
                         <form action="index.php" method="GET">
                             <label for="numeroCaratteri"> Inserisci numero caratteri </label>
                             <input type="number" name="numeroCaratteri">
                             <button class="btn btn-primary">Genera Password</button>
                         </form>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 text-center">
                         <h2>Risultato :</h2>
                         <h3><?php echo $passowrdGenerata ?></h3>
                     </div>
